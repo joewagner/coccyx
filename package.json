@@ -1,0 +1,25 @@
+{
+  "name": "coccyx",
+  "description": "mongodb oplog tailing exposed as events",
+  "author": "Joe Wagner",
+  "version": "0.0.1-alpha",
+  "scripts": {
+    "test": "mocha"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "async": "~0.7.0",
+    "lodash": "~2.4.1",
+    "mongodb": "~1.4.2",
+    "muri": "0.3.1"
+  },
+  "devDependencies": {
+    "mocha": "1.12.0",
+    "should": "3.3.x"
+  },
+  "engines": { "node": ">=0.10.0" },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/JoeWagner/"
+  }
+}
