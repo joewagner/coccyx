@@ -1,3 +1,22 @@
+/*
+ * ======================================
+ * Coccyx: Evented MongoDB oplog tailing
+ * ======================================
+ *  Copyright (C) 2014  Joe Wagner
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 var muri = require('muri');
 var MongoClient = require('mongodb').MongoClient;
@@ -186,10 +205,10 @@ var _attachTail = function (start, oplog, tail) {
         // TODO: deal with errors, maybe just emit on the tail? Just remember cursor timeout is an error...
         console.log('\nCursor Error:');
         console.error(err);
-        throw err;
     });
 
     cursor.on('close', function (err) {
+        console.log('cursor closed');
         attachTail(oplog, tail, start);
     });
 };
