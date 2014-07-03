@@ -38,8 +38,8 @@ coccyx.connect('mongodb://localhost:27018', {mongos: true}, function (err) {
     // listen to all operations on the users collection in the test db
     var tail = coccyx.addTail('test.users');
    
-    // the wag event is triggered when matching operations happen
-    tail.on('wag', function (data) {
+    // the data event is triggered when matching operations happen
+    tail.on('data', function (data) {
         console.log(data.action); // insert, update, or delete
         console.log(data.doc); // on inserts you get the whole doc, on deletes and updates you get {_id: <id>}
         console.log(data.raw); // For your viewing pleasure the actual oplog document
@@ -49,7 +49,7 @@ coccyx.connect('mongodb://localhost:27018', {mongos: true}, function (err) {
     var tail1 = coccyx.addTail('test.users', {name: 'Dwight Merriman'});
    
     // this gets called anytime a document with name === 'Dwight Merriman' is inserted, then anytime that doc is updated or deleted
-    tail1.on('wag', function (data) {
+    tail1.on('data', function (data) {
         // data has same structure as above...
     });
     
@@ -57,7 +57,7 @@ coccyx.connect('mongodb://localhost:27018', {mongos: true}, function (err) {
     var tail2 = coccyx.addTail('test.users', ['535dc4ff30b4dd236514384e']);
     
     // gets called when the document with the above id is updated or removed
-    tail2.on('wag', function (data) {
+    tail2.on('data', function (data) {
         // data has same structure as above...
     });
     
@@ -65,7 +65,7 @@ coccyx.connect('mongodb://localhost:27018', {mongos: true}, function (err) {
     var tail3 = coccyx.addTail('test.users', {name: 'Dwight Merriman'}, ['535dc4ff30b4dd236514384e']);
     
     // gets called when the document with the above id is updated or removed, and when any document matching the query is inserted
-    tail3.on('wag', function (data) {
+    tail3.on('data', function (data) {
         // data has same structure as above...
     });
 });

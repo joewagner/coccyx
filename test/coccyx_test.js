@@ -136,7 +136,7 @@ describe('coccyx', function () {
                 done(err);
             });
 
-            tail.on('wag', function (data) {
+            tail.on('data', function (data) {
                 
                 tail.removeAllListeners();
 
@@ -170,7 +170,7 @@ describe('coccyx', function () {
             });
 
             var count = 0;
-            tail.on('wag', function (data) {
+            tail.on('data', function (data) {
                 data.action.should.equal('insert');
                 data.doc.x.should.equal('1');
                 tail.removeAllListeners();
@@ -206,7 +206,7 @@ describe('coccyx', function () {
                 });
 
                 var count = 0;
-                tail.on('wag', function (data) {
+                tail.on('data', function (data) {
 
                     data.action.should.equal('update');
                     data.doc._id.toString().should.equal(doc._id.toString());
@@ -238,7 +238,7 @@ describe('coccyx', function () {
             });
 
             var count = 0;
-            tail.on('wag', function (data) {
+            tail.on('data', function (data) {
                 // if the name is one of the names inserted for this test increase count
                 // and remove the name from the list, this makes sure we don't have duplicates
                 var indx;
@@ -288,14 +288,13 @@ describe('coccyx', function () {
             });
 
             var count = 0;
-            tail.on('wag', function (data) {
+            tail.on('data', function (data) {
                 count++;
                 if (count === 1) {
                     data.action.should.equal('insert');
                     data.doc.name.should.equal(name);
                 } else {
                     data.action.should.equal('update');
-                    console.log(typeof data.doc._id.toString());
                     data.doc._id.toString().should.equal(docId.toString());
 
                     tail.removeAllListeners();

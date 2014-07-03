@@ -63,7 +63,7 @@ Tail.prototype.onOperation = function (op) {
     var opDoc = getDocFromOp(op);
 
     if (this.namespace === op.ns && this.matchQuery(opDoc)) {
-        this.emit('wag', {
+        this.emit('data', {
             action: action,
             doc: opDoc,
             raw: op
